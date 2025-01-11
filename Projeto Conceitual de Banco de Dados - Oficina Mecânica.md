@@ -1,4 +1,4 @@
-# Desafio 2: Projeto Conceitual de Banco de Dados - Oficina
+# Desafio 2: Projeto Conceitual de Banco de Dados - Oficina Mecânica
 
 ## 🎯 Objetivo do Desafio
 Este projeto foi desenvolvido como parte do bootcamp para construir um **esquema conceitual de banco de dados** para um sistema de controle e gerenciamento de ordens de serviço em uma oficina mecânica. O desafio consistiu em criar as entidades, relacionamentos e atributos necessários para gerenciar informações sobre clientes, veículos, serviços, mecânicos e ordens de serviço (OS).
