@@ -34,11 +34,8 @@ Este repositório contém os projetos e aprendizados adquiridos durante o bootca
 - **Power BI**: Para criação de dashboards e relatórios interativos.
 - **Excel**: Para análises e transformações iniciais de dados.
   
-## 🔍 Como Utilizar Este Repositório
-Cada pasta deste repositório contém os projetos realizados durante o bootcamp, com código-fonte, explicações sobre as soluções desenvolvidas e arquivos de dados utilizados. Os projetos estão divididos em:
-- **Consultas SQL**: Exemplos práticos de queries.
-- **Modelagem de Dados**: Scripts para criação e estruturação de bancos de dados.
-- **Power BI**: Arquivos de relatório e dashboards interativos.
+## 🔍 Projetos Desenvolvidos
+
 
 ## 📝 Conclusão
 Este repositório reflete meu processo de aprendizado ao longo do bootcamp, desde o domínio de consultas SQL até a criação de visualizações e relatórios em Power BI. Com este conhecimento, estou preparado para aplicar as melhores práticas de dados em grandes empresas e contribuir para a transformação digital das organizações.
