@@ -20,6 +20,16 @@ O banco de dados foi estruturado de forma a representar o funcionamento de um e-
 - **Entrega**: Armazena informações sobre o status e o código de rastreio das entregas dos pedidos.
 - **ItemPedido**: Representa os itens de cada pedido, com informações sobre a quantidade e o preço unitário.
 
+  ## As Consultas SQL Implementadas
+
+O desafio requisitou que fossem criadas queries com as seguintes cláusulas:
+- **Recuperações simples com SELECT Statement**
+- **Filtros com WHERE Statement**
+- **Crie expressões para gerar atributos derivados**
+- **Defina ordenações dos dados com ORDER BY**
+- **Condições de filtros aos grupos – HAVING Statement**
+- **Crie junções entre tabelas para fornecer uma perspectiva mais complexa dos dados**
+
 ## Modelo EER
 
 Abaixo se encontra o modelo EER utilizado para basear o script do SQL desse desafio:
@@ -28,11 +38,13 @@ Abaixo se encontra o modelo EER utilizado para basear o script do SQL desse desa
 
 ## Script SQL
 
--- Criar o banco de dados
+**-- Criar o banco de dados**
+
 CREATE DATABASE ECommerce;
 USE ECommerce;
 
--- Tabela de Cliente
+**-- Tabela de Cliente**
+
 CREATE TABLE Cliente (
     cliente_id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
@@ -41,14 +53,16 @@ CREATE TABLE Cliente (
     endereco VARCHAR(200)
 );
 
--- Tabela de Fornecedor
+**-- Tabela de Fornecedor**
+
 CREATE TABLE Fornecedor (
     fornecedor_id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
     cnpj VARCHAR(20)
 );
 
--- Tabela de Produto
+**-- Tabela de Produto**
+
 CREATE TABLE Produto (
     produto_id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
@@ -56,7 +70,8 @@ CREATE TABLE Produto (
     estoque INT
 );
 
--- Tabela de Estoque
+**-- Tabela de Estoque**
+
 CREATE TABLE Estoque (
     estoque_id INT AUTO_INCREMENT PRIMARY KEY,
     quantidade INT,
@@ -66,7 +81,8 @@ CREATE TABLE Estoque (
     FOREIGN KEY (fornecedor_id) REFERENCES Fornecedor(fornecedor_id)
 );
 
--- Tabela de Pedido
+**-- Tabela de Pedido**
+
 CREATE TABLE Pedido (
     pedido_id INT AUTO_INCREMENT PRIMARY KEY,
     cliente_id INT,
@@ -75,7 +91,8 @@ CREATE TABLE Pedido (
     FOREIGN KEY (cliente_id) REFERENCES Cliente(cliente_id)
 );
 
--- Tabela de Pagamento
+**-- Tabela de Pagamento**
+
 CREATE TABLE Pagamento (
     pagamento_id INT AUTO_INCREMENT PRIMARY KEY,
     tipo ENUM('Cartão', 'Boleto', 'Transferência'),
@@ -85,7 +102,8 @@ CREATE TABLE Pagamento (
     FOREIGN KEY (pedido_id) REFERENCES Pedido(pedido_id)
 );
 
--- Tabela de Entrega
+**-- Tabela de Entrega**
+
 CREATE TABLE Entrega (
     entrega_id INT AUTO_INCREMENT PRIMARY KEY,
     status_entrega ENUM('Pendente', 'Enviado', 'Entregue'),
@@ -94,7 +112,8 @@ CREATE TABLE Entrega (
     FOREIGN KEY (pedido_id) REFERENCES Pedido(pedido_id)
 );
 
--- Tabela de Item do Pedido
+**-- Tabela de Item do Pedido**
+
 CREATE TABLE ItemPedido (
     item_id INT AUTO_INCREMENT PRIMARY KEY,
     quantidade INT,
@@ -105,101 +124,95 @@ CREATE TABLE ItemPedido (
     FOREIGN KEY (produto_id) REFERENCES Produto(produto_id)
 );
 
--- Inserir Clientes
+**-- Inserir Clientes**
+
 INSERT INTO Cliente (nome, tipo, cpf_cnpj, endereco)
 VALUES ('João da Silva', 'PF', '123.456.789-00', 'Rua A, 123'),
        ('Empresa XYZ', 'PJ', '12.345.678/0001-90', 'Avenida B, 456');
 
--- Inserir Fornecedores
+**-- Inserir Fornecedores**
+
 INSERT INTO Fornecedor (nome, cnpj)
 VALUES ('Fornecedor 1', '01.234.567/0001-89'),
        ('Fornecedor 2', '98.765.432/0001-10');
 
--- Inserir Produtos
+**-- Inserir Produtos**
+
 INSERT INTO Produto (nome, preco, estoque)
 VALUES ('Produto A', 100.00, 50),
        ('Produto B', 200.00, 30);
 
--- Inserir Estoques
+**-- Inserir Estoques**
+
 INSERT INTO Estoque (quantidade, produto_id, fornecedor_id)
 VALUES (50, 1, 1),
        (30, 2, 2);
 
--- Inserir Pedidos
+**-- Inserir Pedidos**
+
 INSERT INTO Pedido (cliente_id, data_pedido, status_pedido)
 VALUES (1, '2025-01-10', 'Finalizado'),
        (2, '2025-01-15', 'Pendente');
 
--- Inserir Pagamentos
+**-- Inserir Pagamentos**
+
 INSERT INTO Pagamento (tipo, valor, data_pagamento, pedido_id)
 VALUES ('Cartão', 150.00, '2025-01-10', 1),
        ('Boleto', 200.00, '2025-01-15', 2);
 
--- Inserir Entregas
+**-- Inserir Entregas**
+
 INSERT INTO Entrega (status_entrega, codigo_rastreio, pedido_id)
 VALUES ('Enviado', '12345ABCD', 1);
 
--- Inserir Itens de Pedido
+**-- Inserir Itens de Pedido**
+
 INSERT INTO ItemPedido (quantidade, preco_unitario, pedido_id, produto_id)
 VALUES (2, 100.00, 1, 1),
        (1, 200.00, 2, 2);
 
--- SQL Queries
--- 1. Quantos pedidos foram feitos por cada cliente?
+**-- SQL Queries**
+**-- 1. Quantos pedidos foram feitos por cada cliente?**
+
 SELECT c.nome, COUNT(p.pedido_id) AS total_pedidos
 FROM Cliente c
 JOIN Pedido p ON c.cliente_id = p.cliente_id
 GROUP BY c.cliente_id;
 
--- 2. Quais são os dados da tabela Cliente?
+**-- 2. Quais são os dados da tabela Cliente?**
+
 SELECT * 
 FROM Cliente;
 
--- 3. Quais clientes são do tipo Pessoa Jurídica (PJ)?
+**-- 3. Quais clientes são do tipo Pessoa Jurídica (PJ)?**
+
 SELECT cliente_id, nome, tipo 
 FROM Cliente 
 WHERE tipo = 'PJ';
 
--- 4. Qual é a média de preços dos produtos em estoque?
+**-- 4. Qual é a média de preços dos produtos em estoque?**
+
 SELECT AVG(preco) AS preco_medio
 FROM Produto;
 
--- 5. Lista dos produtos de acordo com o preço de forma decrescente:
+**-- 5. Lista dos produtos de acordo com o preço de forma decrescente:**
+
 SELECT produto_id, nome, preco 
 FROM Produto
 ORDER BY preco DESC;
 
--- 6. Quantos produtos existem em cada estoque de fornecedor, sendo apenas fornecedores que têm mais de 40 produtos no estoque?
+**-- 6. Quantos produtos existem em cada estoque de fornecedor, sendo apenas fornecedores que têm mais de 40 produtos no estoque?**
+
 SELECT f.nome AS fornecedor, COUNT(DISTINCT e.produto_id) AS quantidade_produtos
 FROM Fornecedor f
 JOIN Estoque e ON f.fornecedor_id = e.fornecedor_id
 GROUP BY f.nome
 HAVING COUNT(DISTINCT e.produto_id) > 40;
 
--- 7. Junção entre as tabelas Fornecedor, Estoque e Produto, para listar todos os produtos que um fornecedor oferece, com a quantidade disponível e o nome do produto:
+**-- 7. Junção entre as tabelas Fornecedor, Estoque e Produto, para listar todos os produtos que um fornecedor oferece, com a quantidade disponível e o nome do produto:**
+
 SELECT f.nome AS fornecedor, p.nome AS produto, e.quantidade
 FROM Fornecedor f
 JOIN Estoque e ON f.fornecedor_id = e.fornecedor_id
 JOIN Produto p ON e.produto_id = p.produto_id
 ORDER BY f.nome, p.nome;
-
-
-## As Consultas SQL Implementadas
-
-O desafio requisitou que fossem criadas queries com as seguintes cláusulas:
-- **Recuperações simples com SELECT Statement**
-- **Filtros com WHERE Statement**
-- **Crie expressões para gerar atributos derivados**
-- **Defina ordenações dos dados com ORDER BY**
-- **Condições de filtros aos grupos – HAVING Statement**
-- **Crie junções entre tabelas para fornecer uma perspectiva mais complexa dos dados**
-
-Logo, respeitando as diretrizes do desafio foram implementadas as seguintes consultas:
-1. Quantos pedidos foram feitos por cada cliente?
-2. Quais são os dados da tabela Cliente?
-3. Quais clientes são do tipo Pessoa Jurídica (PJ)?
-4. Qual é a média de preços dos produtos em estoque?
-5. Lista dos produtos de acordo com o preço de forma decrescente.
-6. Quantos produtos existem em cada estoque de fornecedor, sendo apenas fornecedores que têm mais de 40 produtos no estoque?
-7. Junção entre as tabelas Fornecedor, Estoque e Produto, para listar todos os produtos que um fornecedor oferece, com a quantidade disponível e o nome do produto.
-
