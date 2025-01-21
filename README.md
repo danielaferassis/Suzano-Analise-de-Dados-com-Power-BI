@@ -17,7 +17,7 @@ Este repositório contém os projetos e aprendizados adquiridos durante o bootca
 |  :----:   | ----------- |
 | 1         |[Projeto Conceitual de Banco de Dados - E-COMMERCE.md](https://github.com/danielaferassis/Suzano-Analise-de-Dados-com-Power-BI/blob/8e02f3e017bfb8e11731360eb01602b819e69dcb/Projeto%20Conceitual%20de%20Banco%20de%20Dados%20-%20E-COMMERCE.md)|
 | 2         | [Projeto Conceitual de Banco de Dados - Oficina Mecânica.md](https://github.com/danielaferassis/Suzano-Analise-de-Dados-com-Power-BI/blob/main/Projeto%20Conceitual%20de%20Banco%20de%20Dados%20-%20Oficina%20Mec%C3%A2nica.md)|
-| 2         | |
+| 2         | [Desafio Primeiro Projeto Lógico de Banco de Dados.mkd](https://github.com/danielaferassis/Suzano-Analise-de-Dados-com-Power-BI/blob/main/Desafio%20Primeiro%20Projeto%20L%C3%B3gico%20de%20Banco%20de%20Dados.mkd) |
 | 3         |x |
 | 4        |x |
 | 5         | x |
